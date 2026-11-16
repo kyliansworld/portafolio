@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claire Castillo | Ciberseguridad & Tecnología</title>
+  <meta name="description" content="Portafolio web de Claire Castillo, estudiante de escuela apasionada por la ciberseguridad, redes, Linux, Python y retos CTF." />
+
+  <!-- Fuentes de Google: Inter y JetBrains Mono para detalles técnicos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              bg: '#090d16',
+              card: '#0f1623',
+              border: '#1e293b',
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Patrón de cuadrícula sutil para estética tech/ciberseguridad */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+    }
+    .dark .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-cyber-bg dark:text-slate-200 font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-400 transition-colors duration-300 bg-grid-pattern">
+
+  <!-- =========================================================
+       1. NAVEGACIÓN SUPERIOR LIMPIA
+  ========================================================= -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-cyber-bg/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo tipográfico estilo terminal -->
+      <a href="#inicio" class="flex items-center gap-2.5 group focus:outline-none">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-slate-950 font-mono font-bold text-sm shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+          &gt;_
+        </div>
+        <span class="font-mono font-semibold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white">
+          claire<span class="text-cyan-500">.sec</span>
+        </span>
+      </a>
+
+      <!-- Enlaces de navegación (Desktop) -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#sobre-mi" class="text-slate-600 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors">Sobre Mí</a>
+        <a href="#habilidades" class="text-slate-600 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors">Habilidades</a>
+        <a href="#proyectos" class="text-slate-600 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors">Proyectos</a>
+        <a href="#contacto" class="text-slate-600 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors">Contacto</a>
+      </nav>
+
+      <!-- Controles: Modo Oscuro/Claro + Menú Móvil -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Botón toggle tema -->
+        <button id="theme-toggle" type="button" aria-label="Cambiar tema oscuro o claro"
+          class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 text-slate-700 dark:text-cyan-400 hover:border-cyan-500/50 transition-all focus:outline-none">
+          <!-- Icono Sol (visible en modo oscuro) -->
+          <svg id="icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+          </svg>
+          <!-- Icono Luna (visible en modo claro) -->
+          <svg id="icon-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+          </svg>
+        </button>
+
+        <!-- Botón menú hamburguesa móvil -->
+        <button id="mobile-menu-btn" type="button" aria-label="Abrir menú"
+          class="md:hidden p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú desplegable móvil -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-cyber-bg/95 px-4 py-4 space-y-2">
+      <a href="#sobre-mi" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400">Sobre Mí</a>
+      <a href="#habilidades" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400">Habilidades</a>
+      <a href="#proyectos" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400">Proyectos</a>
+      <a href="#contacto" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400">Contacto</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- =========================================================
+         2. HERO SECTION (SIN FOTOS, SOLO TIPOGRAFÍA Y VECTORES)
+    ========================================================= -->
+    <section id="inicio" class="relative py-20 sm:py-28 lg:py-32 flex flex-col items-start justify-center">
+      <!-- Resplandor decorativo sutil -->
+      <div class="pointer-events-none absolute -top-10 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
+      <div class="pointer-events-none absolute top-24 right-1/4 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+      <!-- Etiqueta de estado -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 font-mono text-xs sm:text-sm mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span>Hola, mundo // Explorando la seguridad digital</span>
+      </div>
+
+      <!-- Nombre Principal -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+        Claire <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-emerald-400">Castillo</span>
+      </h1>
+
+      <!-- Subtítulo -->
+      <p class="mt-4 text-lg sm:text-2xl font-medium text-slate-700 dark:text-slate-300 flex flex-wrap items-center gap-2">
+        <span>Estudiante de Escuela</span>
+        <span class="text-cyan-500 font-mono">|</span>
+        <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Apasionada por la Ciberseguridad</span>
+      </p>
+
+      <!-- Breve descripción -->
+      <p class="mt-6 max-w-2xl text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+        Curiosa por entender cómo funcionan los sistemas por dentro y cómo protegerlos. Dedico mi tiempo libre a aprender sobre <strong class="font-semibold text-slate-800 dark:text-slate-200">seguridad informática, redes, entornos Linux, scripting en Python</strong> y a resolver desafíos tipo <strong class="font-semibold text-slate-800 dark:text-slate-200">CTF (Capture The Flag)</strong>.
+      </p>
+
+      <!-- Botones de acción -->
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <a href="#proyectos"
+          class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-semibold text-sm sm:text-base shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+          </svg>
+          <span>Ver Proyectos</span>
+        </a>
+
+        <a href="#contacto"
+          class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/70 hover:border-cyan-500 dark:hover:border-cyan-400 text-slate-800 dark:text-slate-200 font-semibold text-sm sm:text-base transition-all hover:-translate-y-0.5">
+          <svg class="w-5 h-5 text-cyan-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+          <span>Contacto</span>
+        </a>
+      </div>
+
+      <!-- Mini barra de métricas / badges técnicos -->
+      <div class="mt-14 pt-8 border-t border-slate-200/80 dark:border-slate-800/80 w-full grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-cyber-card/70 border border-slate-200/80 dark:border-slate-800">
+          <p class="font-mono text-xs text-cyan-600 dark:text-cyan-400">ENFOQUE</p>
+          <p class="mt-1 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">Blue &amp; Red Team Basics</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-cyber-card/70 border border-slate-200/80 dark:border-slate-800">
+          <p class="font-mono text-xs text-emerald-600 dark:text-emerald-400">ENTORNO</p>
+          <p class="mt-1 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">Linux &amp; Bash CLI</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-cyber-card/70 border border-slate-200/80 dark:border-slate-800">
+          <p class="font-mono text-xs text-cyan-600 dark:text-cyan-400">PRÁCTICA</p>
+          <p class="mt-1 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">Retos CTF &amp; Labs</p>
+        </div>
+        <div class="p-4 rounded-xl bg-white/60 dark:bg-cyber-card/70 border border-slate-200/80 dark:border-slate-800">
+          <p class="font-mono text-xs text-emerald-600 dark:text-emerald-400">CÓDIGO</p>
+          <p class="mt-1 font-semibold text-sm sm:text-base text-slate-900 dark:text-white">Python &amp; Git</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. SECCIÓN: SOBRE MÍ
+    ========================================================= -->
+    <section id="sobre-mi" class="py-16 sm:py-24 border-t border-slate-200/80 dark:border-slate-800/80">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="font-mono text-sm font-semibold text-cyan-600 dark:text-cyan-400">01.</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Sobre Mí</h2>
+        <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 max-w-xs"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Texto descriptivo -->
+        <div class="lg:col-span-7 space-y-4 text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed">
+          <p>
+            ¡Hola! Soy <span class="text-slate-900 dark:text-white font-semibold">Claire Castillo</span>, estudiante de escuela con una fuerte vocación por la tecnología, la lógica y la seguridad informática.
+          </p>
+          <p>
+            Mi interés por la ciberseguridad nació al descubrir que detrás de cada conexión a internet, servidor o aplicación existe una arquitectura que debe ser comprendida y defendida. Desde entonces, combino mis estudios escolares con el aprendizaje autodidacta en <span class="text-cyan-600 dark:text-cyan-400 font-medium">defensa de redes, análisis de sistemas Linux y automatización con Python</span>.
+          </p>
+          <p>
+            Disfruto participar en iniciativas <strong class="text-slate-800 dark:text-slate-200">STEM</strong>, documentar lo que aprendo y resolver problemas paso a paso: desde inspeccionar paquetes de red o revisar registros (logs), hasta encontrar pistas ocultas en ejercicios de esteganografía y criptografía básica.
+          </p>
+        </div>
+
+        <!-- Tarjeta estilo Terminal Interactiva (reemplaza fotos con estética tech) -->
+        <div class="lg:col-span-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 text-slate-200 shadow-xl overflow-hidden font-mono text-xs sm:text-sm">
+          <!-- Barra superior de ventana -->
+          <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            </div>
+            <span class="text-slate-400 text-xs">claire@cyberlab:~</span>
+          </div>
+          <!-- Contenido de consola -->
+          <div class="p-5 space-y-3 leading-relaxed">
+            <div>
+              <span class="text-emerald-400">$</span> <span class="text-cyan-300">whoami</span>
+              <p class="text-slate-300 mt-1">claire_castillo — Estudiante &amp; Entusiasta de Ciberseguridad</p>
+            </div>
+            <div>
+              <span class="text-emerald-400">$</span> <span class="text-cyan-300">cat intereses.txt</span>
+              <ul class="text-slate-300 mt-1 space-y-1">
+                <li>&gt; Seguridad en Redes &amp; Protocolos</li>
+                <li>&gt; Administración Linux &amp; Terminal</li>
+                <li>&gt; Scripting defensivo en Python</li>
+                <li>&gt; Retos CTF &amp; Proyectos STEM</li>
+              </ul>
+            </div>
+            <div>
+              <span class="text-emerald-400">$</span> <span class="text-cyan-300">echo $ESTADO</span>
+              <p class="text-emerald-400 mt-1">"Aprendiendo algo nuevo cada día..."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. SECCIÓN: HABILIDADES E INTERESES
+    ========================================================= -->
+    <section id="habilidades" class="py-16 sm:py-24 border-t border-slate-200/80 dark:border-slate-800/80">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-mono text-sm font-semibold text-cyan-600 dark:text-cyan-400">02.</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Habilidades e Intereses</h2>
+        <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 max-w-xs"></div>
+      </div>
+      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mb-10 text-base">
+        Áreas técnicas y herramientas que practico continuamente en laboratorios personales, ejercicios escolares y plataformas de aprendizaje.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Categoría 1: Ciberseguridad & Redes -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400 mb-5">
+            <!-- Icono Escudo / Seguridad -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Ciberseguridad &amp; Redes</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mb-5">
+            Fundamentos de protección de infraestructuras, comunicación segura y resolución de desafíos prácticos.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">Redes LAN/WAN</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">Protocolo SSH</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">Retos CTF</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">Esteganografía</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">Criptografía Básica</span>
+          </div>
+        </div>
+
+        <!-- Categoría 2: Programación & Sistemas -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-5">
+            <!-- Icono Terminal / Código -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Programación &amp; Sistemas</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mb-5">
+            Manejo fluido de entornos basados en Unix y creación de scripts para automatizar tareas repetitivas.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">Linux / Terminal</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">Python 3</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">Bash Scripting</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">HTML / CSS</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">Permisos &amp; Procesos</span>
+          </div>
+        </div>
+
+        <!-- Categoría 3: Herramientas & Análisis -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400 mb-5">
+            <!-- Icono Lupa / Análisis -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Herramientas &amp; Análisis</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mb-5">
+            Control de versiones, inspección de registros del sistema y organización técnica de proyectos.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Análisis de Logs</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Git &amp; GitHub</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Nmap (Básico)</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Wireshark</span>
+            <span class="px-3 py-1 rounded-lg text-xs font-mono font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Markdown Docs</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. SECCIÓN: PROYECTOS DESTACADOS (SIN FOTOS, CON SVG Y MODALES DEMO)
+    ========================================================= -->
+    <section id="proyectos" class="py-16 sm:py-24 border-t border-slate-200/80 dark:border-slate-800/80">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-mono text-sm font-semibold text-cyan-600 dark:text-cyan-400">03.</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Proyectos Destacados</h2>
+        <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 max-w-xs"></div>
+      </div>
+      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mb-10 text-base">
+        Una selección de mis prácticas, scripts y apuntes técnicos desarrollados mientras exploro el mundo de la ciberseguridad.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Proyecto 1 -->
+        <article class="group flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all shadow-sm hover:shadow-lg hover:shadow-cyan-500/5">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/15 to-emerald-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+                <!-- Icono Carpeta / CTF -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" />
+                </svg>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                CTF &amp; Writeups
+              </span>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
+              Bitácora de Retos CTF &amp; Seguridad en Redes
+            </h3>
+            <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              Repositorio documentado con soluciones paso a paso de desafíos introductorios de Capture The Flag: análisis de metadatos, esteganografía en archivos, decodificación Base64/Hex y exploración básica de servicios en red.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Linux</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Esteganografía</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Redes</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-slate-900 dark:bg-slate-800 text-white hover:bg-cyan-600 dark:hover:bg-cyan-500 dark:hover:text-slate-950 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>Ver Código</span>
+              </a>
+              <button type="button" onclick="openDemoModal('ctf')"
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-cyan-500 hover:text-cyan-500 transition-colors">
+                <span>Demo</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Proyecto 2 -->
+        <article class="group flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-emerald-500/60 transition-all shadow-sm hover:shadow-lg hover:shadow-emerald-500/5">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <!-- Icono Llave / Contraseñas -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                </svg>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
+                Python CLI
+              </span>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-400 transition-colors">
+              Auditor de Contraseñas &amp; Generador de Hashes
+            </h3>
+            <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              Herramienta de línea de comandos escrita en Python que evalúa la entropía y fortaleza de contraseñas, detecta patrones comunes y genera sumas de verificación SHA-256 para comprobar la integridad de archivos.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Python</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">SHA-256</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Automatización</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-slate-900 dark:bg-slate-800 text-white hover:bg-emerald-600 dark:hover:bg-emerald-500 dark:hover:text-slate-950 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>Ver Código</span>
+              </a>
+              <button type="button" onclick="openDemoModal('password')"
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+                <span>Demo</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Proyecto 3 -->
+        <article class="group flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all shadow-sm hover:shadow-lg hover:shadow-cyan-500/5">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/15 to-emerald-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+                <!-- Icono Actividad / Logs -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                </svg>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                Blue Team Lab
+              </span>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
+              Analizador de Logs SSH &amp; Alertas Básicas
+            </h3>
+            <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              Script en Python y Bash diseñado para filtrar archivos <code class="font-mono text-xs text-cyan-500">auth.log</code> en servidores Linux, identificar intentos fallidos de inicio de sesión por SSH y resumir las direcciones IP sospechosas.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Análisis de Logs</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">SSH</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Bash / Python</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-slate-900 dark:bg-slate-800 text-white hover:bg-cyan-600 dark:hover:bg-cyan-500 dark:hover:text-slate-950 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>Ver Código</span>
+              </a>
+              <button type="button" onclick="openDemoModal('logs')"
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-cyan-500 hover:text-cyan-500 transition-colors">
+                <span>Demo</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Proyecto 4 -->
+        <article class="group flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-emerald-500/60 transition-all shadow-sm hover:shadow-lg hover:shadow-emerald-500/5">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/15 to-cyan-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <!-- Icono Red / Nodos -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                </svg>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
+                Redes &amp; STEM
+              </span>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-400 transition-colors">
+              Monitor de Conectividad &amp; Puertos Locales
+            </h3>
+            <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              Utilidad educativa para comprobar disponibilidad de hosts en una red local (LAN), verificar latencia y listar puertos TCP abiertos de forma segura en entornos de laboratorio controlado.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80">
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Sockets</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">LAN/WAN</span>
+              <span class="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded">Python</span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-slate-900 dark:bg-slate-800 text-white hover:bg-emerald-600 dark:hover:bg-emerald-500 dark:hover:text-slate-950 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>Ver Código</span>
+              </a>
+              <button type="button" onclick="openDemoModal('network')"
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-400 transition-colors">
+                <span>Demo</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. SECCIÓN: CONTACTO
+    ========================================================= -->
+    <section id="contacto" class="py-16 sm:py-24 border-t border-slate-200/80 dark:border-slate-800/80">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="font-mono text-sm font-semibold text-cyan-600 dark:text-cyan-400">04.</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Contacto</h2>
+        <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1 max-w-xs"></div>
+      </div>
+      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mb-10 text-base">
+        ¿Te interesa compartir recursos de ciberseguridad, colaborar en retos CTF o conversar sobre proyectos tecnológicos? ¡Escríbeme o conecta conmigo en GitHub!
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Tarjetas de contacto rápido -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Tarjeta Email con botón copiar -->
+          <div class="p-5 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <div class="w-11 h-11 shrink-0 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+              </div>
+              <div class="truncate">
+                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">CORREO ELECTRÓNICO</p>
+                <p id="email-text" class="text-sm font-semibold text-slate-900 dark:text-white truncate">claire.castillo.sec@ejemplo.com</p>
+              </div>
+            </div>
+            <button id="copy-email-btn" type="button"
+              class="shrink-0 px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 transition-all">
+              Copiar
+            </button>
+          </div>
+
+          <!-- Tarjeta GitHub -->
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+            class="p-5 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 flex items-center justify-between gap-4 transition-all group">
+            <div class="flex items-center gap-3.5">
+              <div class="w-11 h-11 shrink-0 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs font-mono text-slate-500 dark:text-slate-400">GITHUB</p>
+                <p class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-emerald-400 transition-colors">@clairecastillo</p>
+              </div>
+            </div>
+            <svg class="w-5 h-5 text-slate-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+          </a>
+
+        </div>
+
+        <!-- Formulario de mensaje rápido -->
+        <div class="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-white dark:bg-cyber-card border border-slate-200 dark:border-slate-800">
+          <form id="contact-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="sender-name" class="block text-xs font-mono font-medium text-slate-600 dark:text-slate-400 mb-1.5">NOMBRE</label>
+                <input id="sender-name" type="text" required placeholder="Tu nombre"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors" />
+              </div>
+              <div>
+                <label for="sender-email" class="block text-xs font-mono font-medium text-slate-600 dark:text-slate-400 mb-1.5">CORREO</label>
+                <input id="sender-email" type="email" required placeholder="tu@correo.com"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors" />
+              </div>
+            </div>
+            <div>
+              <label for="sender-message" class="block text-xs font-mono font-medium text-slate-600 dark:text-slate-400 mb-1.5">MENSAJE</label>
+              <textarea id="sender-message" rows="3" required placeholder="Hola Claire, me gustaría conectar contigo..."
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors"></textarea>
+            </div>
+            <button type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-semibold text-sm shadow-md shadow-cyan-500/15 transition-all">
+              <span>Enviar Mensaje</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       FOOTER MINIMALISTA
+  ========================================================= -->
+  <footer class="border-t border-slate-200/80 dark:border-slate-800/80 py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+      <p class="font-mono">
+        &copy; <span id="current-year"></span> Claire Castillo. Construido para GitHub Pages.
+      </p>
+      <p class="font-mono text-xs text-cyan-600 dark:text-cyan-400">
+        [ Sin imágenes externas • 100% Código Limpio ]
+      </p>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       MODAL INTERACTIVO DE DEMO DE PROYECTOS (ESTILO TERMINAL)
+  ========================================================= -->
+  <div id="demo-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+    <div class="w-full max-w-xl rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm text-slate-200">
+      <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+          <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+          <span id="modal-title" class="ml-2 text-slate-400 text-xs">demo_terminal.sh</span>
+        </div>
+        <button id="close-modal-btn" type="button" class="text-slate-400 hover:text-white px-2 py-1 rounded">
+          ✕
+        </button>
+      </div>
+      <div id="modal-body" class="p-5 space-y-3 leading-relaxed max-h-[70vh] overflow-y-auto">
+        <!-- Contenido dinámico inyectado por JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       NOTIFICACIÓN FLOTANTE (TOAST) PARA FEEDBACK SIN ALERT()
+  ========================================================= -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-900 dark:bg-slate-800 text-white border border-cyan-500/40 shadow-xl text-xs sm:text-sm font-medium">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toast-message">Acción completada</span>
+  </div>
+
+  <!-- =========================================================
+       JAVASCRIPT LIMPIO Y AUTOCONTENIDO
+  ========================================================= -->
+  <script>
+    // 1. Año dinámico en el footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // 2. Alternar Modo Oscuro / Claro (inicia en modo oscuro por defecto)
+    const htmlEl = document.documentElement;
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    // Verificar preferencia guardada si existe
+    try {
+      const savedTheme = localStorage.getItem('claire-portfolio-theme');
+      if (savedTheme === 'light') {
+        htmlEl.classList.remove('dark');
+      } else {
+        htmlEl.classList.add('dark');
+      }
+    } catch (e) {
+      htmlEl.classList.add('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      const isDark = htmlEl.classList.contains('dark');
+      try {
+        localStorage.setItem('claire-portfolio-theme', isDark ? 'dark' : 'light');
+      } catch (e) {}
+    });
+
+    // 3. Menú móvil desplegable
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // 4. Notificación Toast reutilizable
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = message;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 3200);
+    }
+
+    // 5. Copiar correo electrónico al portapapeles (compatible con iframes)
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    copyEmailBtn.addEventListener('click', () => {
+      const email = document.getElementById('email-text').textContent.trim();
+      const tempInput = document.createElement('input');
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        copyEmailBtn.textContent = '¡Copiado!';
+        showToast('Correo copiado al portapapeles');
+        setTimeout(() => {
+          copyEmailBtn.textContent = 'Copiar';
+        }, 2000);
+      } catch (err) {
+        showToast('No se pudo copiar automáticamente');
+      }
+      document.body.removeChild(tempInput);
+    });
+
+    // 6. Simulación de envío de formulario de contacto
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('sender-name').value.trim();
+      showToast(`¡Gracias ${name}! Tu mensaje ha sido registrado.`);
+      contactForm.reset();
+    });
+
+    // 7. Modal de Demos Interactivas en Terminal para cada Proyecto
+    const demoModal = document.getElementById('demo-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    const demosData = {
+      ctf: {
+        title: 'ctf_writeup_estego.sh',
+        content: `
+          <p class="text-emerald-400">$ exiftool reto_oculto.bin</p>
+          <p class="text-slate-300">Archivo analizado: 14.2 KB | Tipo: Datos binarios</p>
+          <p class="text-cyan-300">Comentario encontrado: "ZmxhZ3tjbGFpcmVfY3liZXJfbGFiXzIwMjZ9"</p>
+          <p class="text-emerald-400 mt-2">$ echo "ZmxhZ3tjbGFpcmVfY3liZXJfbGFiXzIwMjZ9" | base64 -d</p>
+          <p class="text-amber-300 font-semibold">flag{claire_cyber_lab_2026}</p>
+          <p class="text-slate-400 text-xs mt-3">// Reto resuelto mediante inspección de metadatos y decodificación Base64.</p>
+        `
+      },
+      password: {
+        title: 'python3 pass_audit.py',
+        content: `
+          <p class="text-emerald-400">$ python3 pass_audit.py --check "C1b3r#Segur@2026"</p>
+          <p class="text-slate-300">[+] Longitud: 16 caracteres (Óptima)</p>
+          <p class="text-slate-300">[+] Complejidad: Mayúsculas, minúsculas, números y símbolos</p>
+          <p class="text-emerald-400">[✓] Nivel de seguridad: FUERTE (Entropía ~94 bits)</p>
+          <p class="text-cyan-300 mt-2">[#] SHA-256: 8f434346648f6b96df89dda901c5176b10a6d83961dd3c1ac88b59b2dc327aa4</p>
+        `
+      },
+      logs: {
+        title: 'python3 parse_ssh_logs.py',
+        content: `
+          <p class="text-emerald-400">$ python3 parse_ssh_logs.py /var/log/auth.log</p>
+          <p class="text-slate-300">Analizando 1,420 líneas de registro...</p>
+          <p class="text-rose-400">[!] 18 intentos fallidos detectados desde 192.168.1.45 (usuario: admin)</p>
+          <p class="text-amber-300">[!] 5 intentos fallidos detectados desde 10.0.0.12 (usuario: root)</p>
+          <p class="text-emerald-400">[✓] Reporte exportado a resumen_seguridad.txt</p>
+        `
+      },
+      network: {
+        title: 'python3 lan_check.py',
+        content: `
+          <p class="text-emerald-400">$ python3 lan_check.py --target 127.0.0.1</p>
+          <p class="text-slate-300">Iniciando escaneo educativo en localhost...</p>
+          <p class="text-cyan-300">Puerto 22  (SSH)   -> ABIERTO [Latencia: 1.2ms]</p>
+          <p class="text-cyan-300">Puerto 80  (HTTP)  -> ABIERTO [Latencia: 0.9ms]</p>
+          <p class="text-slate-500">Puerto 443 (HTTPS) -> CERRADO</p>
+          <p class="text-emerald-400 mt-2">[✓] Verificación completada en 0.14 segundos.</p>
+        `
+      }
+    };
+
+    function openDemoModal(key) {
+      const data = demosData[key];
+      if (!data) return;
+      modalTitle.textContent = data.title;
+      modalBody.innerHTML = data.content;
+      demoModal.classList.remove('hidden');
+      demoModal.classList.add('flex');
+    }
+
+    closeModalBtn.addEventListener('click', () => {
+      demoModal.classList.add('hidden');
+      demoModal.classList.remove('flex');
+    });
+
+    demoModal.addEventListener('click', (e) => {
+      if (e.target === demoModal) {
+        demoModal.classList.add('hidden');
+        demoModal.classList.remove('flex');
+      }
+    });
+  </script>
+</body>
+</html>
